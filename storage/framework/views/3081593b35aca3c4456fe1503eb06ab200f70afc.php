@@ -14,6 +14,11 @@
     		<?php echo e(Form::text('title',null,['placeholder'=>'post title','class'=>'form-control'])); ?>
 
 
+    		<?php echo e(Form::label('slug',"slug:")); ?>
+
+    		<?php echo e(Form::text('slug',null,['placeholder'=>'slug','class'=>'form-control'])); ?>
+
+
     		<?php echo e(Form::label('post_body',"Post Body:")); ?>
 
     		<?php echo e(Form::textarea('post_body',null,['placeholder'=>'hi','class'=>'form-control'])); ?>

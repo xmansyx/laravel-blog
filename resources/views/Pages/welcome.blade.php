@@ -1,5 +1,5 @@
 @extends('mainlayout')
-@section('pagename','| welcome')
+@section('pagename',' welcome')
 @section('content')
         <div class="row">
             <div class="col-md-12">
@@ -11,27 +11,19 @@
         </div>
         <div class="row">
             <div class="col-md-8">
-                <div class="post">
-                    <h1 class="postTitle">post title</h1>
-                    <p>sLorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates similique dolores minus eligendi illo assumenda libero repellat repellendus quia non, iusto labore, id tempore eaque praesentium officia amet, laudantium blanditiis?</p>
-                    <a href="#" class="btn btn-primary"> read more</a>
-                </div>
+                @foreach ($posts as $post)
+                    <div class="post">
+                        <h1 class="postTitle">{{$post->title}}</h1>
+                        <p>
+                            {{substr($post->body,0,150)}}{{strlen($post->body) > 50 ? '...':''}}
+                            
+                        </p>
+                        {!! Html::linkRoute('post.show','read more',[$post->slug],['class' => 'btn btn-primary'])!!}
+                    </div>
+                @endforeach
+                
 
-                <hr>
-
-                <div class="post">
-                    <h1 class="postTitle">post title</h1>
-                    <p>sLorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates similique dolores minus eligendi illo assumenda libero repellat repellendus quia non, iusto labore, id tempore eaque praesentium officia amet, laudantium blanditiis?</p>
-                    <a href="#" class="btn btn-primary"> read more</a>
-                </div>
-
-                <hr>
-
-                <div class="post">
-                    <h1 class="postTitle">post title</h1>
-                    <p>sLorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates similique dolores minus eligendi illo assumenda libero repellat repellendus quia non, iusto labore, id tempore eaque praesentium officia amet, laudantium blanditiis?</p>
-                    <a href="#" class="btn btn-primary"> read more</a>
-                </div>
+                
             </div>
             <div class="col-md-3 col-md-offset-1">
                 <h1> sideBar</h1>

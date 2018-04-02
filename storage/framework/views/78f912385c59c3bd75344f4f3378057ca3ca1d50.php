@@ -1,11 +1,6 @@
 <?php $__env->startSection("pagename"," $post->title"); ?>
 <?php $__env->startSection("content"); ?>
-	<?php if(Session::has("posted")): ?>
-	<div class="alert alert-success">
-		success <?php echo e(Session::get('posted')); ?>
 
-	</div>
-	<?php endif; ?>
 	<div class="row">
 		<div class="col-md-8">
 			<h2> <?php echo e($post->title); ?> </h2>

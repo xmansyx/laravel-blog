@@ -11,6 +11,9 @@
     		{{ Form::label('title',"Title:") }}
     		{{ Form::text('title',null,['placeholder'=>'post title','class'=>'form-control'])}}
 
+    		{{ Form::label('slug',"slug:") }}
+    		{{ Form::text('slug',null,['placeholder'=>'slug','class'=>'form-control'])}}
+
     		{{ Form::label('post_body',"Post Body:") }}
     		{{ Form::textarea('post_body',null,['placeholder'=>'hi','class'=>'form-control'])}}
 			<hr>

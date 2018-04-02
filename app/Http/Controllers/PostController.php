@@ -40,12 +40,15 @@ class PostController extends Controller
         //validate data 
         $this->validate($request,[
             'title' => 'required | max:25',
+            'slug' => 'required | max:100|unique:posts,slug',
             'post_body' => 'required',
+
         ]);
 
         // store the data 
         $post = new Post;
         $post->title = $request->title;
+        $post->slug = $request->slug;
         $post->body = $request->post_body;
         $post->save();
 
@@ -60,10 +63,19 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($postdata)
     {
-        $thePost = Post::find($id);
+        if(is_numeric($postdata)){
+            $thePost = Post::find($postdata);
+        }
+
+
+        else{
+            $thePost = Post::where('slug','=',$postdata)->first();
+        }
+
         return view("Posts.show")->with('post',$thePost);
+
     }
 
     /**
@@ -72,9 +84,17 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($postdata)
     {
-        $thePost = Post::find($id);
+        if(is_numeric($postdata)){
+            $thePost = Post::find($postdata);
+        }
+
+
+        else{
+            $thePost = Post::where('slug','=',$postdata)->first();
+        }
+
         return view("Posts.edit")->with('post',$thePost);
     }
 
@@ -94,7 +114,7 @@ class PostController extends Controller
         ]);
 
         // store the data 
-        $post = new Post;
+        $post = Post::find($id);
         $post->title = $request->input('title');
         $post->body = $request->input('body');
         $post->save();
@@ -117,4 +137,10 @@ class PostController extends Controller
         Session::flash('success',"your post successfully deleted");
         return redirect()->route('post.index');
     }
+
+    public function getIndex(){
+        $posts = Post::all();
+        return view("Pages.welcome")->withPosts($posts);
+    }
+
 }
